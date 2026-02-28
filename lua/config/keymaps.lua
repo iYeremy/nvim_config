@@ -1,0 +1,8 @@
+vim.keymap.set("n", "<leader>bn",":bn<CR>", {noremap = true, silent = true})
+vim.keymap.set("n", "<leader>bN",":bp<CR>", {noremap = true, silent = true})
+-- vim.keymap.set("n", "<leader>bc",":bd<CR>", {noremap = true, silent = true})
+vim.keymap.set("n", "<leader>bc", function()
+  local current = vim.api.nvim_get_current_buf()
+  vim.cmd("bn")
+  vim.cmd("bd " .. current)
+end, { silent = true })
