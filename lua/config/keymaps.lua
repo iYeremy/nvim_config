@@ -1,8 +1,25 @@
-vim.keymap.set("n", "<leader>bn",":bn<CR>", {noremap = true, silent = true})
-vim.keymap.set("n", "<leader>bN",":bp<CR>", {noremap = true, silent = true})
--- vim.keymap.set("n", "<leader>bc",":bd<CR>", {noremap = true, silent = true})
-vim.keymap.set("n", "<leader>bc", function()
-  local current = vim.api.nvim_get_current_buf()
-  vim.cmd("bn")
-  vim.cmd("bd " .. current)
-end, { silent = true })
+-- ================================
+-- Buffer Management Keybindings
+-- Namespace: <leader>b
+-- ================================
+
+-- Go to next buffer
+vim.keymap.set("n", "<leader>bn", "<cmd>bnext<CR>", {
+  silent = true,
+  desc = "Buffer: Next",
+})
+
+-- Go to previous buffer
+vim.keymap.set("n", "<leader>bp", "<cmd>bprevious<CR>", {
+  silent = true,
+  desc = "Buffer: Previous",
+})
+
+-- Delete current buffer
+vim.keymap.set("n", "<leader>bd", ":bd<CR>", {
+  noremap = true,
+  silent = true,
+  desc = "Buffer: Delete",
+})
+
+
