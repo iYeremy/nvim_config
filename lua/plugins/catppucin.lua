@@ -1,27 +1,30 @@
--- En tu archivo de plugins
 return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    priority = 1000, -- Carga esto primero
+    priority = 1000,
     config = function()
       require("catppuccin").setup({
-        transparent_background = true, -- ¡AQUÍ ESTÁ TU TRANSPARENCIA!
+        transparent_background = true, -- Native transparency
         integrations = {
-          treesitter = true, -- Activa los colores especiales de Treesitter
+          treesitter = true,
         },
-		custom_highlights = function(colors)
-			return {
-				LineNr = { fg = colors.overlay1 },
-				CursorLineNr = { fg = colors.lavender },
-				CursorLine = { bg = "NONE" }, -- Quita el fondo gris de la línea actual
-				FoldColumn = { bg = "NONE" },
-				SignColumn = { bg = "NONE" },
-			}
-end,
+        custom_highlights = function(colors)
+          return {
+            -- Overriding backgrounds to ensure total transparency
+            Normal = { bg = "NONE" },
+            NormalFloat = { bg = "NONE" },
+            SignColumn = { bg = "NONE" },
+            EndOfBuffer = { bg = "NONE" },
+            -- Your existing custom highlights
+            LineNr = { fg = colors.overlay1 },
+            CursorLineNr = { fg = colors.lavender },
+            CursorLine = { bg = "NONE" },
+            FoldColumn = { bg = "NONE" },
+          }
+        end,
       })
       vim.cmd.colorscheme "catppuccin-mocha"
-    end
+    end,
   },
-  -- ... tu plugin de treesitter abajo
 }
