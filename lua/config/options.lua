@@ -29,11 +29,11 @@ vim.diagnostic.config({
 -- GLOBAL DIAGNOSTIC SIGNS
 -- =============================================================================
 
-local signs = { 
-  Error = " ", -- Un círculo con una X
-  Warn  = " ", -- Un triángulo de advertencia
-  Hint  = "󰠠 ", -- Una bombilla o foco
-  Info  = " "  -- Un círculo de información
+local signs = {
+  Error = " ",
+  Warn  = " ",
+  Hint  = "󰠠 ",
+  Info  = " "
 }
 
 for type, icon in pairs(signs) do
