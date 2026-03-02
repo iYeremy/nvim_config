@@ -15,6 +15,7 @@ The following are required:
 - Git
 - A Nerd Font (for icons and UI components)
 - ripgrep (rg) — required for picker/grep features
+- imagemagick - required to view images
 - fd (recommended for faster file discovery)
 
 ---

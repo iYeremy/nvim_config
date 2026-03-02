@@ -24,3 +24,27 @@ opt.swapfile = false          -- Disable swap files
 vim.diagnostic.config({
   virtual_text = true,
 })
+
+-- =============================================================================
+-- GLOBAL DIAGNOSTIC SIGNS
+-- Description: Modern way to define diagnostic icons without deprecation warnings.
+-- =============================================================================
+
+local signs = {
+  ERROR = " ",
+  WARN  = " ",
+  HINT  = "󰠠 ",
+  INFO  = " "
+}
+
+vim.diagnostic.config({
+  virtual_text = true,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = signs.ERROR,
+      [vim.diagnostic.severity.WARN]  = signs.WARN,
+      [vim.diagnostic.severity.HINT]  = signs.HINT,
+      [vim.diagnostic.severity.INFO]  = signs.INFO,
+    },
+  },
+})
