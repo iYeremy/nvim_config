@@ -1,6 +1,4 @@
 import math
-hola""
-print("hola")
 
 class DemoSintaxis:
     """Clase para probar Treesitter"""
