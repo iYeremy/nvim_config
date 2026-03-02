@@ -1,46 +1,55 @@
--- ================================
--- Buffer Management Keybindings
--- Namespace: <leader>b
--- ================================
+-- =============================================================================
+-- KEYBINDINGS CONFIGURATION
+-- Description: Custom mappings for buffers, navigation, and plugin integration.
+-- =============================================================================
 
--- Go to next buffer
-vim.keymap.set("n", "<leader>bn", "<cmd>bnext<CR>", {
-  silent = true,
-  desc = "Buffer: Next",
+local keymap = vim.keymap
+
+-- -----------------------------------------------------------------------------
+-- Buffer Management (<leader>b)
+-- -----------------------------------------------------------------------------
+
+-- Navigate to the next buffer in the current window
+keymap.set("n", "<leader>bn", "<cmd>bnext<cr>", { 
+  silent = true, 
+  desc = "Buffer: Next" 
 })
 
--- Go to previous buffer
-vim.keymap.set("n", "<leader>bp", "<cmd>bprevious<CR>", {
-  silent = true,
-  desc = "Buffer: Previous",
+-- Navigate to the previous buffer in the current window
+keymap.set("n", "<leader>bp", "<cmd>bprevious<cr>", { 
+  silent = true, 
+  desc = "Buffer: Previous" 
 })
 
--- Delete current buffer
-vim.keymap.set("n", "<leader>bd", ":bd<CR>", {
-  noremap = true,
-  silent = true,
-  desc = "Buffer: Delete",
+-- Close the current buffer
+keymap.set("n", "<leader>bd", "<cmd>bdelete<cr>", { 
+  silent = true, 
+  desc = "Buffer: Delete" 
 })
 
--- Delete all buffers except the current onee
-vim.keymap.set("n", "<leader>bo", function()
+-- Close all buffers except the one currently active
+keymap.set("n", "<leader>bo", function()
   local current = vim.api.nvim_get_current_buf()
+  local buffers = vim.api.nvim_list_bufs()
 
-  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-    if buf ~= current and vim.bo[buf].buflisted then
-      vim.api.nvim_buf_delete(buf, {})
+  for _, buf in ipairs(buffers) do
+    if buf ~= current and vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].buflisted then
+      vim.api.nvim_buf_delete(buf, { force = false })
     end
   end
-end, {
-  silent = true,
-  desc = "Buffer: Delete Others",
+end, { 
+  silent = true, 
+  desc = "Buffer: Delete Others" 
 })
 
--- Open buffer picker (Snacks)
-vim.keymap.set("n", "<leader>bb", function()
-  Snacks.picker.buffers()
-end, {
-  silent = true,
-  desc = "Buffer: List",
+-- Toggle buffer picker using Snacks.nvim
+keymap.set("n", "<leader>bb", function()
+  if Snacks then
+    Snacks.picker.buffers()
+  else
+    print("Snacks.nvim not found")
+  end
+end, { 
+  silent = true, 
+  desc = "Buffer: Picker List" 
 })
-

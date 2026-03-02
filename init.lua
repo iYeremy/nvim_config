@@ -9,12 +9,12 @@
 --
 -- Keep this file minimal. All logic should live inside lua/config/.
 -----------------------------------------------------------------------
+-- Load plugin manager and plugin specifications
+require("config.lazy")
 
 -- Core editor settings (UI, behavior, performance)
 require("config.options")
 
--- Load plugin manager and plugin specifications
-require("config.lazy")
 
 -- Keybindings
 require("config.keymaps")
