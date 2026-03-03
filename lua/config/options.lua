@@ -48,3 +48,13 @@ vim.diagnostic.config({
     },
   },
 })
+
+-- =============================================================================
+-- PROVIDERS CONFIGURATION
+-- Description: Disabling unused providers to speed up startup and clean healthchecks.
+-- =============================================================================
+
+vim.g.loaded_node_provider = 0   -- Use Mason's node, not the system global provider
+vim.g.loaded_perl_provider = 0   -- Disable Perl provider
+vim.g.loaded_ruby_provider = 0   -- Disable Ruby provider
+-- vim.g.loaded_python3_provider = 0 -- Uncomment this only if you won't use Python plugins
