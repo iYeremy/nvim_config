@@ -1,6 +1,6 @@
 -- =============================================================================
 -- SNACKS.NVIM 
--- Description: Modern Dashboard, Picker, and Explorer configuration.
+-- Description: Modern Dashboard, Picker, Zen Mode and Explorer configuration.
 -- Note: Explorer uses Folke's nested layout fix for Sixel/UI stability.
 -- =============================================================================
 
@@ -11,7 +11,22 @@ return {
   ---@type snacks.Config
   opts = {
     -- -------------------------------------------------------------------------
-    --  Explorer & Picker (Right-Side Layout)
+    -- Zen Mode (Focus optimization without backdrop)
+    -- -------------------------------------------------------------------------
+    zen = {
+      center = false,
+      win = {
+        backdrop = false, -- Keeps terminal transparency intact
+        width = 0,
+      },
+      show = {
+        statusline = false,
+        tabline = false,
+      },
+    },
+
+    -- -------------------------------------------------------------------------
+    -- Explorer & Picker (Right-Side Layout)
     -- -------------------------------------------------------------------------
     picker = {
       enabled = true,
@@ -29,7 +44,7 @@ return {
     },
 
     -- -------------------------------------------------------------------------
-    --  Enabled Modules & UI Utilities
+    -- Enabled Modules & UI Utilities
     -- -------------------------------------------------------------------------
     explorer  = { enabled = true, replace_netrw = true },
     dashboard = { 
@@ -62,6 +77,6 @@ return {
     -- Focus & Dashboard
     { "<leader>z",       function() Snacks.zen() end,            desc = "Toggle Zen Mode" },
     { "<leader>Z",       function() Snacks.zen.zoom() end,       desc = "Toggle Zoom" },
-    { "<leader>b-",      function() Snacks.dashboard.open() end, desc = "Open Dashboard" },
+    { "<leader>bd",      function() Snacks.dashboard.open() end, desc = "Open Dashboard" },
   }
 }
