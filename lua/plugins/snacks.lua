@@ -60,6 +60,9 @@ return {
     scope     = { enabled = true }, -- Highlight current code scope
     bigfile   = { enabled = true }, -- Performance optimization for large files
     words     = { enabled = true }, -- Auto-highlight words under cursor
+	image = { enabled = false },     -- We use image.nvim instead
+	notifier = { enabled = false },  -- Prevents the "not ready" error
+	quickfile = { enabled = true },  -- This one is actually good for performance
   },
 
   -- ---------------------------------------------------------------------------
