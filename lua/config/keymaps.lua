@@ -53,3 +53,32 @@ end, {
   silent = true, 
   desc = "Buffer: Picker List" 
 })
+
+-- -----------------------------------------------------------------------------
+-- Window Navigation (Direct access via Ctrl)
+-- Description: Jump between splits without the <C-w> prefix.
+-- -----------------------------------------------------------------------------
+
+-- Move to the split on the LEFT
+keymap.set("n", "<c-h>", "<C-w>h", { 
+  silent = true, 
+  desc = "Window: Focus Left" 
+})
+
+-- Move to the split BELOW
+keymap.set("n", "<c-j>", "<C-w>j", { 
+  silent = true, 
+  desc = "Window: Focus Down" 
+})
+
+-- Move to the split ABOVE
+keymap.set("n", "<c-k>", "<C-w>k", { 
+  silent = true, 
+  desc = "Window: Focus Up" 
+})
+
+-- Move to the split on the RIGHT (Perfect for Explorer)
+keymap.set("n", "<c-l>", "<C-w>l", { 
+  silent = true, 
+  desc = "Window: Focus Right" 
+})
