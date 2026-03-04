@@ -31,12 +31,49 @@ return {
 
     -- CUSTOM SERVER CONFIGURATIONS
     -- JDTLS Path (Mason integration)
-    local mason_path = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
-    
-    vim.lsp.config("jdtls", {
-      cmd = { mason_path .. "/bin/jdtls" },
-      capabilities = capabilities,
-    })
+	local mason_path = vim.fn.stdpath("data") .. "/mason/packages/jdtls"
+	local lombok_path = vim.fn.expand("~/.local/share/java/lombok.jar")
+
+	local function project_uses_lombok()
+	  -- Detecta Maven
+	  if vim.fn.filereadable("pom.xml") == 1 then
+		local content = table.concat(vim.fn.readfile("pom.xml"), "\n")
+		if content:match("lombok") then
+		  return true
+		end
+	  end
+
+	  -- Detecta Gradle
+	  if vim.fn.filereadable("build.gradle") == 1 then
+		local content = table.concat(vim.fn.readfile("build.gradle"), "\n")
+		if content:match("lombok") then
+		  return true
+		end
+	  end
+
+	  return false
+	end
+
+	local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
+	local workspace_dir = vim.fn.stdpath("data") .. "/jdtls-workspaces/" .. project_name
+
+	local cmd = {
+	  mason_path .. "/bin/jdtls",
+	  "-data",
+	  workspace_dir,
+	  "--jvm-arg=-Xms1g",
+	  "--jvm-arg=-Xmx2g",
+	}
+
+	if project_uses_lombok() then
+	  table.insert(cmd, "--jvm-arg=-javaagent:" .. lombok_path)
+	  table.insert(cmd, "--jvm-arg=-Xbootclasspath/a:" .. lombok_path)
+	end
+
+	vim.lsp.config("jdtls", {
+	  cmd = cmd,
+	  capabilities = capabilities,
+	})
 
     -- LUA_LS (Fixing 'undefined global vim')
     vim.lsp.config("lua_ls", {
