@@ -28,11 +28,15 @@ return {
     -- -------------------------------------------------------------------------
     -- Explorer & Picker (Right-Side Layout)
     -- -------------------------------------------------------------------------
-    picker = {
+	picker = {
       enabled = true,
       sources = {
         explorer = {
-          -- Official fix for positioning the explorer in Snacks.nvim
+          -- File filtering and visibility
+          hidden = true, -- Show dotfiles (.gitignore, .env, etc.) by default
+          ignored = true, -- Respect .gitignore rules
+          exclude = { ".git", "node_modules", "__pycache__" }, -- CUSTOM IGNORE LIST
+          
           layout = {
             layout = {
               position = "right", -- Anchored to the right to stabilize main buffer
