@@ -15,7 +15,6 @@ require("config.lazy")
 -- Core editor settings (UI, behavior, performance)
 require("config.options")
 
-
 -- Keybindings
 require("config.keymaps")
 
