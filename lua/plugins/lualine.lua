@@ -3,6 +3,8 @@
 -- Description: Statusline configuration with Catppuccin theme and LSP integration.
 -- =============================================================================
 
+-- local util = require("util") -- No definided (IN PROGRESS)
+
 return {
   "nvim-lualine/lualine.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -19,8 +21,13 @@ return {
         lualine_a = { { "mode", separator = { left = " " }, right_padding = 2 } },
         lualine_b = { "branch", "diff", "diagnostics" },
         lualine_c = { "filename" },
-        lualine_x = { "encoding", "fileformat", "filetype" },
-        lualine_y = { "progress" },
+		lualine_x = { 
+		  -- { util.get_lsp_name, icon = ' ', color = { fg = '#ffffff', gui = 'bold' } }, -- Added LSP Server Name (IN PROGRESS)
+		  --'encoding', ej: utf-8 
+		  --'fileformat', ej: unix
+		  'filetype' 
+		},        
+		lualine_y = { "progress" },
         lualine_z = { "location" },
       },
       inactive_sections = {
